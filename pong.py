@@ -13,6 +13,7 @@ YELLOW = (255, 255, 0)
 paddle_color = WHITE
 ball_color = YELLOW
 caption = "Pong Game"
+image = pg.image.load("logo.jpg")
 
 #window variables
 WIDTH, HEIGHT = 700, 500
@@ -20,6 +21,7 @@ background_color = DARK_BLUE
 FPS = 60    #frames per second
 
 #setting up the window
+logo = pg.display.set_icon(image)
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption(caption) #set title of game
 
@@ -34,9 +36,11 @@ def main():
     run = True
     while run:
         clock.tick(FPS)
+        
         draw(screen)
         for event in pg.event.get():
             if event.type == pg.QUIT:
+                #if close button pressed
                 run = False
                 break
     pg.quit() #quit game
