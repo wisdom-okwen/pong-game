@@ -1,6 +1,6 @@
 import pygame as pg
-# from pygame.locals import *
-# import ball, paddle
+from pygame.locals import *
+import ball, paddle
 
 pg.init()   #initialize pygame
 
