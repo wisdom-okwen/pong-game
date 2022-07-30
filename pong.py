@@ -18,7 +18,7 @@ FPS = 70    #frames per second
 
 #object variables
 paddle_color, paddle_height, paddle_width = MAROON, 80, 10
-ball_color, ball_radius = YELLOW, 10
+ball_color, ball_radius = YELLOW, 7
 line_color, line_start, line_end = WHITE, (WIDTH//2, HEIGHT//8), (WIDTH//2, HEIGHT-HEIGHT//8)
 caption = "Pong Game"
 image = pg.image.load("logo.jpg")
@@ -49,8 +49,22 @@ def handle_paddle_movement(keys, left_paddle, right_paddle):
     if keys[pg.K_UP] and right_paddle.y - right_paddle.velocity >= 0:
         right_paddle.move_paddle(up=True)
         
-
-        
+def ball_collisions(ball, left_paddle, right_paddle):
+    #check for collision with top and bottom walls
+    if ball.y + ball.radius >= HEIGHT:
+        ball.y_vel *= -1
+    elif ball.y - ball.radius <= 0:
+        ball.y_vel *= -1 
+       
+    #check collision with paddles 
+    if  ball.x_vel < 0:
+        if ball.y >= left_paddle.y and ball.y <= left_paddle.y + left_paddle.height:
+            if ball.x - ball.radius <= left_paddle.x + left_paddle.width:
+                ball.x_vel *= -1
+    else:
+        if ball.y >= right_paddle.y and ball.y <= right_paddle.y + right_paddle.height:
+            if ball.x + ball.radius >= right_paddle.x:
+                ball.x_vel *= -1  
     
 def main():
     clock = pg.time.Clock() #set pygame clock
@@ -72,6 +86,7 @@ def main():
         keys = pg.key.get_pressed() #get all keyboard inputs
         handle_paddle_movement(keys, left_paddle, right_paddle)
         ball1.move_ball()
+        ball_collisions(ball1, left_paddle, right_paddle)
     pg.quit() #quit game
              
 

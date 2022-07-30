@@ -1,15 +1,15 @@
 import pygame as pg
 
 class Ball:
-    MAX_VEL = 2
+    MAX_VEL = 5
     border = 15
     def __init__(self, x, y, radius, color):
-        self.radius = radius
         self.x = x
         self.y = y
+        self.radius = radius
         self.color = color
         self.x_vel = self.MAX_VEL
-        self.y_vel = 0
+        self.y_vel = 3
        
     def draw_ball(self, screen):
         pg.draw.circle(screen, self.color, (self.x, self.y), self.radius, self.border)
