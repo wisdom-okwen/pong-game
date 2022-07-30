@@ -1,7 +1,7 @@
 import pygame as pg
 
 class Paddle:
-    
+    velocity = 4
     def __init__(self, x, y, width, height, color):
         self.x = x
         self.y = y
@@ -13,6 +13,10 @@ class Paddle:
         pg.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
         
         
-    def move_paddle(self):
-        pass
+    def move_paddle(self, up=True):
+        
+        if up:
+            self.y -= self.velocity
+        else:
+            self.y += self.velocity
     
