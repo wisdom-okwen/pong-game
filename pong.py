@@ -1,4 +1,5 @@
 import pygame as pg
+from datetime import time
 from pygame.locals import *
 import ball, paddle
 
@@ -49,7 +50,7 @@ def handle_paddle_movement(keys, left_paddle, right_paddle):
         
     
 def main():
-    clock = pg.time.Clock()
+    clock = pg.time.Clock() #set pygame clock
     run = True
     left_paddle = paddle.Paddle(0, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height, paddle_color)
     right_paddle = paddle.Paddle(WIDTH-paddle_width, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height, paddle_color)
@@ -64,8 +65,9 @@ def main():
                 run = False
                 break
         
-        keys = pg.key.get_pressed()
+        keys = pg.key.get_pressed() #get all keyboard inputs
         handle_paddle_movement(keys, left_paddle, right_paddle)
+        ball1.move_ball()
     pg.quit() #quit game
              
 
