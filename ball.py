@@ -9,7 +9,7 @@ class Ball:
         self.radius = radius
         self.color = color
         self.x_vel = self.MAX_VEL
-        self.y_vel = 3
+        self.y_vel = 0
        
     def draw_ball(self, screen):
         pg.draw.circle(screen, self.color, (self.x, self.y), self.radius, self.border)
