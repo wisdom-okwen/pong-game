@@ -19,6 +19,7 @@ FPS = 70    #frames per second
 
 #object variables
 paddle_color, paddle_height, paddle_width = MAROON, 80, 10
+WIN_SCORE = 5
 ball_color, ball_radius = YELLOW, 7
 line_color, line_start, line_end = WHITE, (WIDTH//2, HEIGHT//8), (WIDTH//2, HEIGHT-HEIGHT//8)
 caption = "Pong Game"
@@ -111,13 +112,38 @@ def main():
         ball1.move_ball()
         ball_collisions(ball1, left_paddle, right_paddle)
         
-
+        #count score if ball goes off window
         if ball1.x < 0:
             right_score += 1
             ball1.reset_ball()
         elif ball1.x > WIDTH:
             left_score += 1
             ball1.reset_ball()
+           
+        #decide who won the game 
+        if left_score >= WIN_SCORE:
+            win_text = f"Left Player Won by {left_score} points"
+            text = SCORE_FONT.render(win_text, 1, WHITE)
+            screen.blit(text, (WIDTH//2 - text.get_width()//2, text.get_height()//2))
+            pg.display.update()
+            pg.time.delay(3000)
+            ball1.reset_ball()
+            left_paddle.reset_pad()
+            right_paddle.reset_pad()
+            left_score = 0
+            right_score = 0
+        elif right_score >= WIN_SCORE:
+            win_text = f"Right Player Won by {right_score} points"
+            text = SCORE_FONT.render(win_text, 1, WHITE)
+            screen.blit(text, (WIDTH//2 - text.get_width()//2, text.get_height()//2))
+            pg.display.update()
+            pg.time.delay(3000)
+            ball1.reset_ball()
+            left_paddle.reset_pad()
+            right_paddle.reset_pad()
+            left_score = 0
+            right_score = 0
+            
     pg.quit() #quit game
              
 
