@@ -114,10 +114,10 @@ def main():
 
         if ball1.x < 0:
             right_score += 1
-            
+            ball1.reset_ball()
         elif ball1.x > WIDTH:
             left_score += 1
-        
+            ball1.reset_ball()
     pg.quit() #quit game
              
 
