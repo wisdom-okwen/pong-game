@@ -13,6 +13,7 @@ WHITE = (255, 255, 255)
 
 #window variables
 WIDTH, HEIGHT = 800, 400
+SCORE_FONT = pg.font.SysFont("comicsans", 25)
 background_color = TEAL
 FPS = 70    #frames per second
 
@@ -28,9 +29,15 @@ logo = pg.display.set_icon(image)
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption(caption) #set title of game
 
-def draw(screen, paddles, ball1, line1):
+def draw(screen, paddles, ball1, line1, left_score, right_score):
     #draw objects on screen
     screen.fill(background_color)
+    
+    left_text = SCORE_FONT.render(f"{left_score}", 1, WHITE)
+    right_text = SCORE_FONT.render(f"{right_score}", 1, WHITE)
+    screen.blit(left_text, (WIDTH//4 - left_text.get_width()//2, 15))
+    screen.blit(left_text, (WIDTH*(3/4) - right_text.get_width()//2, 15))
+    
     for pad in paddles:
         pad.draw_rect(screen)
     
@@ -79,16 +86,20 @@ def ball_collisions(ball, left_paddle, right_paddle):
 
     
 def main():
+    
     clock = pg.time.Clock() #set pygame clock
     run = True
     left_paddle = paddle.Paddle(0, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height, paddle_color)
     right_paddle = paddle.Paddle(WIDTH-paddle_width, HEIGHT//2 - paddle_height//2, paddle_width, paddle_height, paddle_color)
     ball1 = ball.Ball(WIDTH//2, HEIGHT//2, ball_radius, ball_color)
     line1 = mid_line.Line(line_start, line_end, line_color)
+    
+    right_score = 0
+    left_score = 0
     while run:
         clock.tick(FPS)
         
-        draw(screen, [left_paddle, right_paddle], ball1, line1)
+        draw(screen, [left_paddle, right_paddle], ball1, line1, left_score, right_score)
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 #if close button pressed
@@ -99,6 +110,14 @@ def main():
         handle_paddle_movement(keys, left_paddle, right_paddle)
         ball1.move_ball()
         ball_collisions(ball1, left_paddle, right_paddle)
+        
+
+        if ball1.x < 0:
+            right_score += 1
+            
+        elif ball1.x > WIDTH:
+            left_score += 1
+        
     pg.quit() #quit game
              
 
