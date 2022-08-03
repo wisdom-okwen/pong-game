@@ -36,7 +36,7 @@ def draw(screen, paddles, ball1, line1, left_score, right_score):
     left_text = SCORE_FONT.render(f"{left_score}", 1, WHITE)
     right_text = SCORE_FONT.render(f"{right_score}", 1, WHITE)
     screen.blit(left_text, (WIDTH//4 - left_text.get_width()//2, 15))
-    screen.blit(left_text, (WIDTH*(3/4) - right_text.get_width()//2, 15))
+    screen.blit(right_text, (WIDTH*(3/4) - right_text.get_width()//2, 15))
     
     for pad in paddles:
         pad.draw_rect(screen)
