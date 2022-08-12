@@ -1,9 +1,9 @@
 import pygame as pg
 from datetime import time
-from pygame.locals import *
 import ball, paddle, mid_line
 
 pg.init()   #initialize pygame
+pg.mixer.init()  #initialize mixer module for sound effects
 
 #set all needed colors
 TEAL = (0, 102, 102)
