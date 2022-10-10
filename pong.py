@@ -161,7 +161,7 @@ def main():
             left_score = 0
             right_score = 0
             
-            
+            a = 5
             
     pg.quit() #quit game
              
