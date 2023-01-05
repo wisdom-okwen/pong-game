@@ -23,7 +23,7 @@ WIN_SCORE = 5
 ball_color, ball_radius = YELLOW, 7
 line_color, line_start, line_end = WHITE, (WIDTH//2, HEIGHT//8), (WIDTH//2, HEIGHT-HEIGHT//8)
 caption = "Pong Game"
-image = pg.image.load("logo.jpg")
+image = pg.image.load("images/logo.jpg")
 
 #setting up the window
 logo = pg.display.set_icon(image)
