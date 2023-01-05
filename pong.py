@@ -1,12 +1,10 @@
 import pygame as pg
-from datetime import time
+# from datetime import time
 import ball, paddle, mid_line
 import emoji
 import time 
 
 pg.init()   #initialize pygame
-pg.mixer.init()  #initialize mixer module for sound effects
-
 #set all needed colors
 TEAL = (0, 102, 102)
 MAROON = (110, 0, 0)
@@ -40,25 +38,12 @@ def draw(screen, paddles, ball1, line1, left_score, right_score):
     right_text = SCORE_FONT.render(f"{right_score}", 1, WHITE)
     screen.blit(left_text, (WIDTH//4 - left_text.get_width()//2, 15))
     screen.blit(right_text, (WIDTH*(3/4) - right_text.get_width()//2, 15))
-    #add emoji characters
-    smiley = SCORE_FONT.render(emoji.emojize(":grinning_face:"), 1, YELLOW)
-    sadey = SCORE_FONT.render(emoji.emojize("🥲"), 1, YELLOW)
     
     #draw paddles
     for pad in paddles:
         pad.draw_rect(screen)
     
-    #print emoji
-    if left_score > right_score:
-        screen.blit(smiley, (WIDTH//4, 15 ))
-        screen.blit(sadey, (WIDTH*(3/4) + right_text.get_width()//2))
-    elif right_score > left_score:
-        screen.blit(smiley, (WIDTH*(3/4), 15 ))
-        screen.blit(sadey, (WIDTH//4, 15))
-    else:
-        screen.blit(sadey, (WIDTH//4 - left_text.get_width() - 15, 15))
-        screen.blit(sadey, (WIDTH*(3/4) + 15, 15 ))
-    
+
     ball1.draw_ball(screen)
     line1.draw_line(screen)
     pg.display.update()
@@ -91,7 +76,6 @@ def ball_collisions(ball, left_paddle, right_paddle):
                 y_diff = pad_mid_y - ball.y
                 reduction_factor = (left_paddle.height /2 ) / ball.MAX_VEL
                 ball.y_vel = -1 * (y_diff / reduction_factor)
-
     else:
         if ball.y >= right_paddle.y and ball.y <= right_paddle.y + right_paddle.height:
             if ball.x + ball.radius >= right_paddle.x:
@@ -160,9 +144,7 @@ def main():
             right_paddle.reset_pad()
             left_score = 0
             right_score = 0
-            
-            a = 5
-            
+                        
     pg.quit() #quit game
              
 
